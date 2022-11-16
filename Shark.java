@@ -1,4 +1,4 @@
-public class Shark extends Thread{
+public class Shark{
 	
 	private static TopScreen ts;
 	private static ReturnScreen rs;
@@ -7,25 +7,13 @@ public class Shark extends Thread{
 	private static SerchScreen ss;
 	public static void main(String[] args){
 		Shark s = new Shark();
-		s.start();
-		
-		
-		ts.setVisible(true);
-		
-	}
-	
-	public void run(){
 		ts = new TopScreen();
 		rs = new ReturnScreen();
 		ls = new LendScreen();
 		cs = new CompScreen();
 		ss = new SerchScreen();
 		
-		ts.topPre(ts);
-		rs.returnPre(rs);
 		ls.lendPre(ls);
-		cs.compPre(cs);
-		ss.serchPre(ss);
 	}
 	
 	public void visibleControl(int i){
@@ -35,15 +23,15 @@ public class Shark extends Thread{
 		cs.setVisible(false);
 		ss.setVisible(false);
 		if(i == 1){
-			ts.setVisible(true);
+			ts.topPre(ts);
 		}else if(i == 2){
-			rs.setVisible(true);
+			rs.returnPre(rs);
 		}else if(i == 3){
-			ls.setVisible(true);
+			ls.lendPre(ls);
 		}else if(i == 4){
-			cs.setVisible(true);
+			cs.compPre(cs);
 		}else if(i == 5){
-			ss.setVisible(true);
+			ss.serchPre(ss);
 		}else{
 			return;
 		}
