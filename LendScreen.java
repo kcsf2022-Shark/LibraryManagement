@@ -42,9 +42,11 @@ public class LendScreen extends JFrame{
 		submit = new JButton("ë›èo");
 		
 		lendBtn.setEnabled(false);
+		bookConfirm.setEnabled(false);
 		//TextField
 		userText = new JTextField(5);
 		bookText = new JTextField(5);
+		bookText.setEnabled(false);
 		//List
 		lendSche = new JList<String>(s1);
 		lendConf = new JList<String>(s1);

@@ -3,7 +3,7 @@ import java.util.Date;
 import java.util.Calendar;
 
 public class DBManager{
-	private static final String URL = "jdbc:mySQL://localhost/r3";
+	private static final String URL = "jdbc:mySQL://localhost/shark";
 	private static final String NAME = "root";
 	private static final String PASS = "kcsf";
 	private static Connection con;
@@ -20,23 +20,23 @@ public class DBManager{
 			e.printStackTrace();
 		}
 	}
-	public String serchUser(int user){
+	public boolean serchUser(int user){
 		try{
-			result = stmt.executeQuery("SELECT user_name FROM  user WHERE user_id = " + user + ";");
-			return result.getString("user_name");
+			result = stmt.executeQuery("SELECT user_id FROM  user WHERE user_id = " + user + ";");
+			return true;
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
-		return "";
+		return false;
 	}
-	public String serchBook(int book){
+	public boolean serchBook(int book){
 		try{
-			result = stmt.executeQuery("SELECT book_name FROM book_manager WHERE book_id = " + book + ";");
-			return result.getString("book_name");
+			result = stmt.executeQuery("SELECT book_id FROM book_manager WHERE book_id = " + book + ";");
+			return true;
 		}catch(SQLException e){
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
-		return "";
+		return false;
 	}
 	public void lend(int user, int book){
 		String stock = "";
@@ -47,11 +47,15 @@ public class DBManager{
 		returnSche = calendar.getTime();//â¡éZå„ÇÃéûçèÇì¸ÇÍÇÈ
 		try{
 			//borrow_userï\Ç…ê}èëë›èoèÓïÒÇí«â¡Ç∑ÇÈ
-			stmt.executeUpdate("INSERT INTO borrow_user VALUES(" +
-								user + "," + book + "," + nowDate + "," + returnSche + ");");
-			//
-			result = stmt.executeQuery("SELECT 
-			stmt.executeUpdate("UPDATE book_manager SET stock = 
+			result = stmt.executeQuery("SELECT stock FROM book_manager WHERE book_id = " + book + ";");
+			int i = result.getInt("stock");
+			if(0 < i){
+				stmt.executeUpdate("UPDATE book_manager SET stock = " + (i - 1) + ";");
+				stmt.executeUpdate("INSERT INTO borrow_user VALUES(" +
+									user + "," + book + "," + nowDate + "," + returnSche + ");");
+			}else{
+				
+			}
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
