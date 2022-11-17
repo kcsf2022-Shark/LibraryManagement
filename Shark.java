@@ -13,7 +13,7 @@ public class Shark{
 		cs = new CompScreen();
 		ss = new SerchScreen();
 		
-		rs.returnPre(rs);
+		ts.topPre(ts);
 	}
 	
 	public void visibleControl(int i){
