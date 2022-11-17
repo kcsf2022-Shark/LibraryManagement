@@ -21,6 +21,7 @@ public class LendScreen extends JFrame{
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice gd = ge.getDefaultScreenDevice();
 		gd.setFullScreenWindow(ls);
+		
 		//Container
 		cntnr = getContentPane();
 		cntnr.setLayout(new GridLayout(2, 1));
