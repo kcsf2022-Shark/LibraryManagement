@@ -27,21 +27,29 @@ public class DBManager{
 		//貸出画面のuserConfirm押下時に呼び出される
 		try{
 			result = stmt.executeQuery("SELECT user_id FROM  user WHERE user_id = " + user + ";");
-			return true;
+			if(result.getString("user_id").equals("")){
+				return false;
+			}else{
+				return true;
+			}
 		}catch(SQLException e){
 			e.printStackTrace();
-			return false;
 		}
+		return false;
 	}
 	public boolean serchBook(int book){
 		//貸出画面のbookConfirm押下時に呼び出される
 		try{
 			result = stmt.executeQuery("SELECT book_id FROM book_manager WHERE book_id = " + book + ";");
-			return true;
+			if(result.getString("book_id").equals("")){
+				return false;
+			}else{
+				return true;
+			}
 		}catch(SQLException e){
 			e.printStackTrace();
-			return false;
 		}
+		return false;
 	}
 	public void lendBook(int user, int book){
 		//貸出画面のsubmit押下時に呼び出される
@@ -68,17 +76,33 @@ public class DBManager{
 	public boolean userPossesion(int user, int book){
 		//返却画面のbookConfirm押下時に呼び出される
 		try{
-			result = stmt.executeQuery("SELECT book_id FROM borrow_user WHERE user_id = " + user + " and book_id = " + book + ";);
-			return true;
+			result = stmt.executeQuery("SELECT book_id FROM borrow_user WHERE user_id = " + user + " and book_id = " + book + ";");
+			if(result.getString("book_id").equals("")){
+				return false;
+			}else{
+				return true;
+			}
 		}catch(SQLException e){
 			e.printStackTrace();
-			return false;
 		}
+		return false;
 	}
 	
-	public void returnBook(List<String>){
+	public void returnBook(List<Integer> list){
 		//返却画面のsubmit押下時に呼び出される
-		
+		int cnt = 0;
+		try{
+			for(int i = 0; result.next() == true; i++){
+				stmt.executeUpdate("DELETE FROM borrow_user WHERE book_id = " + list.get(i) + ";");
+			}
+			for(int i = 0; result.next() == true; i++){
+				result = stmt.executeQuery("SELECT stock FROM book_manager WHERE book_id = " + list.get(i) + ";");
+				cnt = result.getInt("stock") + 1;
+				stmt.executeUpdate("UPDATE book_manager SET stock = " + cnt + " WHERE book_id = " + list.get(i) + ";");
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
 	}
 	
 	public List<String> returnSche(int user){
