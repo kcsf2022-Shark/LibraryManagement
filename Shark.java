@@ -6,14 +6,14 @@ public class Shark{
 	private static CompScreen cs;
 	private static SerchScreen ss;
 	public static void main(String[] args){
-		Shark s = new Shark();
+		DBManager db = new DBManager();
 		ts = new TopScreen();
 		rs = new ReturnScreen();
 		ls = new LendScreen();
 		cs = new CompScreen();
 		ss = new SerchScreen();
 		
-		ls.lendPre(ls);
+		rs.returnPre(rs);
 	}
 	
 	public void visibleControl(int i){
