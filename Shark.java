@@ -7,31 +7,29 @@ public class Shark{
 	private static SerchScreen ss;
 	public static void main(String[] args){
 		DBManager db = new DBManager();
-		ts = new TopScreen();
 		rs = new ReturnScreen();
 		ls = new LendScreen();
 		cs = new CompScreen();
 		ss = new SerchScreen();
-		
-		ts.topPre(ts);
+		ts = new TopScreen();
 	}
 	
-	public void visibleControl(int i){
+	public static void visibleControl(int i){
 		ts.setVisible(false);
 		rs.setVisible(false);
 		ls.setVisible(false);
 		cs.setVisible(false);
 		ss.setVisible(false);
 		if(i == 1){
-			ts.topPre(ts);
+			ts.setVisible(true);
 		}else if(i == 2){
-			rs.returnPre(rs);
+			rs.setVisible(true);
 		}else if(i == 3){
-			ls.lendPre(ls);
+			ls.setVisible(true);
 		}else if(i == 4){
-			cs.compPre(cs);
+			cs.setVisible(true);
 		}else if(i == 5){
-			ss.serchPre(ss);
+			ss.setVisible(true);
 		}else{
 			return;
 		}

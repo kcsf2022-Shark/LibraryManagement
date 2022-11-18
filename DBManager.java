@@ -23,6 +23,7 @@ public class DBManager{
 			e.printStackTrace();
 		}
 	}
+	
 	public boolean serchUser(int user){
 		//貸出画面のuserConfirm押下時に呼び出される
 		try{
@@ -37,6 +38,7 @@ public class DBManager{
 		}
 		return false;
 	}
+	
 	public boolean serchBook(int book){
 		//貸出画面のbookConfirm押下時に呼び出される
 		try{
@@ -51,6 +53,7 @@ public class DBManager{
 		}
 		return false;
 	}
+	
 	public void lendBook(int user, int book){
 		//貸出画面のsubmit押下時に呼び出される
 		nowDate = new Date();//現在時刻を取得
@@ -73,6 +76,7 @@ public class DBManager{
 			e.printStackTrace();
 		}
 	}
+	
 	public boolean userPossesion(int user, int book){
 		//返却画面のbookConfirm押下時に呼び出される
 		try{
