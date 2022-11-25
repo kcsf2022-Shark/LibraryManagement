@@ -19,12 +19,8 @@ public class ReturnScreen extends JFrame{
 		super("ï‘ãpâÊñ ");
 		super.setUndecorated(true);
 		super.setResizable(false);
-		returnPre();
-	}
-	public void returnPre(){
-		if(pre){
-			String[] s1 = {"aaaaaaaaaaa","aaaaaaaaaaaaaa","aaaaaaaa","aa","a","aaaaaa","aaa"};
-			
+		
+		String[] s1 = {"                           ","","","","","","","","","",""};
 			//FullScreen
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 			GraphicsDevice gd = ge.getDefaultScreenDevice();
@@ -33,8 +29,8 @@ public class ReturnScreen extends JFrame{
 			cntnr = getContentPane();
 			cntnr.setLayout(new GridLayout(2, 1));
 			//Panel
-			p1 = new JPanel(/*new GridLayout(1, 3)*/);
-			p2 = new JPanel(/*new GridLayout(1, 2)*/);
+			p1 = new JPanel();
+			p2 = new JPanel();
 			p3 = new JPanel(new FlowLayout());
 			p4 = new JPanel(new FlowLayout());
 			p5 = new JPanel(new BorderLayout());
@@ -61,8 +57,6 @@ public class ReturnScreen extends JFrame{
 			userLbl = new JLabel("ÉÜÅ[ÉU:");
 			bookLbl = new JLabel("ñ{:");
 			
-			
-			
 			p1.add(topBtn);
 			p1.add(modeLbl);
 			btnPanel.add(lendBtn);
@@ -85,15 +79,34 @@ public class ReturnScreen extends JFrame{
 			cntnr.add(panelP);
 			cntnr.add(p3);
 			setDefaultCloseOperation(EXIT_ON_CLOSE);
-			pre = false;
 			this.setVisible(false);
-		}
 	}
+	
 	public void actionPerformed(ActionEvent e){
 	 	s = new Shark();
+		if(e.getSource()== topBtn){
+			s.visibleControl(this, 1);
+		}
+		if(e.getSource()== lendBtn){
+		 	s.visibleControl(this, 3);
+		}
 		if(e.getSource()== userConfirm){
-			DBManager db= new DBManager();
-			List<String> returnSchedule = db.returnSche(Integer.parseInt(userText.getText()));
+			DBManager db = new DBManager();
+			if(returnSche == null){
+		  		userText.setEnabled(false);
+				userConfirm.setEnabled(false);
+				bookText.setEnabled(true);
+				bookConfirm.setEnabled(true);
+			}
+		}
+		if(e.getSource()==bookConfirm){
+	    DBManager db = new DBManager();
+		   
+	
+		}
+		if(e.getSource()==submit){
+	    
+	    
 		}
 	}
 }
