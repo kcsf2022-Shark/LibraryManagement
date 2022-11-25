@@ -32,28 +32,6 @@ public class Shark{
 			return;
 		}
 	}
-	/*
-	public static void visibleControl(int i){
-		ts.setVisible(false);
-		rs.setVisible(false);
-		ls.setVisible(false);
-		cs.setVisible(false);
-		ss.setVisible(false);
-		if(i == 1){
-			ts.setVisible(true);
-		}else if(i == 2){
-			rs.setVisible(true);
-		}else if(i == 3){
-			ls.setVisible(true);
-		}else if(i == 4){
-			cs.setVisible(true);
-		}else if(i == 5){
-			ss.setVisible(true);
-		}else{
-			return;
-		}
-	}
-	*/
 	
 	public void createInstance(int i){
 		if(i == 1){
