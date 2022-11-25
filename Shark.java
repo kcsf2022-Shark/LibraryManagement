@@ -1,3 +1,5 @@
+import javax.swing.JFrame;
+
 public class Shark{
 	
 	private static TopScreen ts;
@@ -14,6 +16,23 @@ public class Shark{
 		ts = new TopScreen();
 	}
 	
+	public static void visibleControl(JFrame f, int i){
+		f.setVisible(false);
+		if(i == 1){
+			ts.setVisible(true);
+		}else if(i == 2){
+			rs.setVisible(true);
+		}else if(i == 3){
+			ls.setVisible(true);
+		}else if(i == 4){
+			cs.setVisible(true);
+		}else if(i == 5){
+			ss.setVisible(true);
+		}else{
+			return;
+		}
+	}
+	/*
 	public static void visibleControl(int i){
 		ts.setVisible(false);
 		rs.setVisible(false);
@@ -34,6 +53,7 @@ public class Shark{
 			return;
 		}
 	}
+	*/
 	
 	public void createInstance(int i){
 		if(i == 1){
