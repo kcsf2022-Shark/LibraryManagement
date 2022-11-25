@@ -120,7 +120,7 @@ public class DBManager{
 		List<String> nameList = new ArrayList<String>();
 		try{
 			
-			result = stmt.executeQuery(/*borrow_user‚É“o˜^‚³‚ê‚½user‚ªØ‚è‚Ä‚¢‚é–{‚Ì–¼‘O‚ğselect‚·‚é(user_id‚Íˆø”‚Å“n‚³‚ê‚éB)*/);
+			result = stmt.executeQuery("SELECT bu.user_id, bu.book_id, bm.book_name FROM borrow_user AS bu, book_manager AS bm WHERE bu.book_id = bm.book_id AND bu.user_id = " + user + ";");
 			while(result.next()){
 				nameList.add(result.getString("book_name"));
 			}
