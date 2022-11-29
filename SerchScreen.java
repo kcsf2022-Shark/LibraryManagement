@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
 
 public class SerchScreen extends JFrame implements ActionListener{
 	private Container cntnr;
@@ -62,7 +63,6 @@ public class SerchScreen extends JFrame implements ActionListener{
 		cntnr.add(p4);
 		cntnr.add(p3);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setVisible(false);
 	}
 	
 	public void actionPerformed(ActionEvent e){
@@ -71,12 +71,9 @@ public class SerchScreen extends JFrame implements ActionListener{
 			s.visibleControl(1);
 		}else if(e.getSource() == serchBtn){
 		 	DBManager db= new DBManager();
-            List<String>  returnserchBookName = db.serchBookName(serchText.getText());
-			nameList.setListData(returnserchBookName.toArray());
-            List<String>  returnserchBookCategory = db.serchBookCategory(serchText.getText());
-			categoryList.setListData(returnserchBookCategory.toArray());
-            List<Integer>  returnserchBookStock = db.serchBookStock(serchText.getText());
-			stockList.setListData(returnserchBookStock.toArray());
+			nameList.setListData(db.serchBookName(serchText.getText()).toArray());
+			categoryList.setListData(db.serchBookCategory(serchText.getText()).toArray());
+			stockList.setListData(db.serchBookStock(serchText.getText()).toArray());
         }
     }
 }

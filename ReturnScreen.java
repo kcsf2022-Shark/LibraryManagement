@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
 
-public class ReturnScreen extends JFrame{
+public class ReturnScreen extends JFrame implements ActionListener{
 	private Container cntnr;
 	private JButton topBtn, returnBtn, lendBtn, userConfirm, bookConfirm, submit;
 	private JTextField userText, bookText;
@@ -45,6 +45,16 @@ public class ReturnScreen extends JFrame{
 			bookConfirm = new JButton("Šm’è");
 			submit = new JButton("•Ô‹p");
 			
+			bookConfirm
+			submit.setEnabled(false);
+			
+			topBtn.addActionListener(this);
+			lendBtn.addActionListener(this);
+			returnBtn.addActionListener(this);
+			userConfirm.addActionListener(this);
+			bookConfirm.addActionListener(this);
+			submit.addActionListener(this);
+			
 			returnBtn.setEnabled(false);
 			//TextField
 			userText = new JTextField(5);
@@ -79,19 +89,18 @@ public class ReturnScreen extends JFrame{
 			cntnr.add(panelP);
 			cntnr.add(p3);
 			setDefaultCloseOperation(EXIT_ON_CLOSE);
-			this.setVisible(false);
 	}
 	
 	public void actionPerformed(ActionEvent e){
 	 	s = new Shark();
+		DBManager db = new DBManager();
 		if(e.getSource()== topBtn){
-			s.visibleControl(this, 1);
+			s.visibleControl(1);
 		}
 		if(e.getSource()== lendBtn){
-		 	s.visibleControl(this, 3);
+		 	s.visibleControl(3);
 		}
 		if(e.getSource()== userConfirm){
-			DBManager db = new DBManager();
 			if(returnSche == null){
 		  		userText.setEnabled(false);
 				userConfirm.setEnabled(false);
@@ -100,13 +109,11 @@ public class ReturnScreen extends JFrame{
 			}
 		}
 		if(e.getSource()==bookConfirm){
-	    DBManager db = new DBManager();
-		   
-	
+			
 		}
 		if(e.getSource()==submit){
-	    
-	    
+			
+			s.visibleControl(4);
 		}
 	}
 }

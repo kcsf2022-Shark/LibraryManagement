@@ -32,17 +32,16 @@ public class TopScreen extends JFrame implements ActionListener{
 		returnBtn.addActionListener(this);
 		serchBtn.addActionListener(this);
 		stopBtn.addActionListener(this);
-		this.setVisible(false);
 	}
 	
 	public void actionPerformed(ActionEvent e){
 		s = new Shark();
 		if(e.getSource() == lendBtn){
-			s.visibleControl(this, 3);
+			s.visibleControl(3);
 		}else if(e.getSource() == returnBtn){
-			s.visibleControl(this, 2);
+			s.visibleControl(2);
 		}else if(e.getSource() == serchBtn){
-			s.visibleControl(this, 5);
+			s.visibleControl(5);
 		}else if(e.getSource() == stopBtn){
 			System.exit(0);
 		}else{

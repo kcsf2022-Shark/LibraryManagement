@@ -6,8 +6,8 @@ public class LendScreen extends JFrame implements ActionListener{
 	private Container cntnr;
 	public JButton topBtn, returnBtn, lendBtn, userConfirm, bookConfirm, submit;
 	public JTextField userText, bookText;
-	public JList bookName, bookCate;
-	private JLabel modeLbl, userLbl, bookLbl;
+	private JTextField lendUser, lendBook, lendCategory;
+	private JLabel modeLbl, userLbl, bookLbl, userName, bookName, bookCategory;
 	private JPanel p1, p2, p3, p4, p5, p6, btnPanel, panelP;
 	
 	
@@ -19,7 +19,6 @@ public class LendScreen extends JFrame implements ActionListener{
 		super("貸出画面");
 		super.setUndecorated(true);
 		super.setResizable(false);
-		String[] s1 = {"                   ","","","","","","","","","","","","","",""};
 		//FullScreen
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice gd = ge.getDefaultScreenDevice();
@@ -47,17 +46,23 @@ public class LendScreen extends JFrame implements ActionListener{
 		
 		lendBtn.setEnabled(false);	
 		bookConfirm.setEnabled(false);
+		submit.setEnabled(false);
 		//TextField
 		userText = new JTextField(5);
 		bookText = new JTextField(5);
 		bookText.setEnabled(false);
-		//List
-		bookName = new JList<String>(s1);
-		bookCate = new JList<String>(s1);
+		lendUser = new JTextField(10);
+		lendBook = new JTextField(10);
+		lendCategory = new JTextField(10);
+		
 		//Label
 		modeLbl = new JLabel("本を借りる");
 		userLbl = new JLabel("ユーザ:");
 		bookLbl = new JLabel("本:");
+		userName = new JLabel("借りる人");
+		bookName = new JLabel("本のタイトル");
+		bookCategory = new JLabel("カテゴリー");
+		
 		
 		topBtn.addActionListener(this);
 		returnBtn.addActionListener(this);
@@ -78,26 +83,29 @@ public class LendScreen extends JFrame implements ActionListener{
 		p6.add("East", bookConfirm);
 		p2.add(p5);
 		p2.add(p6);
+		p3.add(userName);
+		p3.add(lendUser);
 		p3.add(bookName);
-		p3.add(bookCate);
+		p3.add(lendBook);
+		p3.add(bookCategory);
+		p3.add(lendCategory);
 		p4.add(submit);
 		panelP.add(p1);
 		panelP.add(p2);
-		panelP.add(p4);
+		panelP.add(p3);
 		cntnr.add(panelP);
-		cntnr.add(p3);
+		cntnr.add(p4);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setVisible(false);
 	}
 	
 	public void actionPerformed(ActionEvent e){
 		s = new Shark();
 		db = new DBManager();
 		if(e.getSource() == topBtn){
-			s.visibleControl(this, 1);
+			s.visibleControl(1);
 		}
 		if(e.getSource() == returnBtn){
-			s.visibleControl(this, 2);
+			s.visibleControl(2);
 		}
 		if(e.getSource() == userConfirm){
 			bool = db.serchUser(Integer.parseInt(userText.getText()));
@@ -113,10 +121,17 @@ public class LendScreen extends JFrame implements ActionListener{
 			if(bool == true){
 				bookConfirm.setEnabled(false);
 				bookText.setEnabled(false);
+				submit.setEnabled(true);
 			}
 		}
 		if(e.getSource() == submit){
 			db.lendBook(Integer.parseInt(userText.getText()), Integer.parseInt(bookText.getText()));
+			try{
+				Thread.sleep(1000);
+			}catch(InterruptedException ex){
+				ex.printStackTrace();
+			}
+			s.visibleControl(4);
 		}
 	}
 }

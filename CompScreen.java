@@ -22,16 +22,16 @@ public class CompScreen extends JFrame implements ActionListener{
 		label = new JLabel("ˆ—‚ªŠ®—¹‚µ‚Ü‚µ‚½B");
 		label.setFont(new Font("Ariai",Font.PLAIN, 28)); 
    	    button = new JButton("TOP‰æ–Ê‚Ö");
+		button.addActionListener(this);
 	    cntnr.add(label);
 	    cntnr.add(button);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setVisible(false);
 	}
 	
 	public void actionPerformed(ActionEvent e){
 	 	s = new Shark();
 		if(e.getSource() == button){
-            s.visibleControl(this, 1);
+            s.visibleControl(1);
         }
 	}
 }
