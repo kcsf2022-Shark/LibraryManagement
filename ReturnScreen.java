@@ -45,7 +45,7 @@ public class ReturnScreen extends JFrame implements ActionListener{
 			bookConfirm = new JButton("Šm’è");
 			submit = new JButton("•Ô‹p");
 			
-			bookConfirm
+			//bookConfirm
 			submit.setEnabled(false);
 			
 			topBtn.addActionListener(this);

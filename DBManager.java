@@ -24,38 +24,42 @@ public class DBManager{
 		}
 	}
 	
-	public boolean serchUser(int user){
+	public String serchUser(int user){
 		//貸出画面のuserConfirm押下時に呼び出される
 		try{
-			result = stmt.executeQuery("SELECT user_id FROM  user WHERE user_id = " + user + ";");
+			result = stmt.executeQuery("SELECT user_name FROM  user WHERE user_id = " + user + ";");
 			if(result.next()){
-				if(result.getString("user_id").equals("")){
-					return false;
+				String u = result.getString("user_name");
+				if(u.equals("")){
+					return "ユーザーが見つかりません。";
 				}else{
-					return true;
+					return u;
 				}
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
-		return false;
+		return "ユーザーが見つかりません。";
 	}
 	
-	public boolean serchBook(int book){
+	public ArrayList<String> serchBook(int book){
 		//貸出画面のbookConfirm押下時に呼び出される
+		ArrayList<String> list = new ArrayList<>();
 		try{
-			result = stmt.executeQuery("SELECT book_id FROM book_manager WHERE book_id = " + book + ";");
+			result = stmt.executeQuery("SELECT book_id, book_name, category FROM book_manager WHERE book_id = " + book + ";");
 			if(result.next()){
 				if(result.getString("book_id").equals("")){
-					return false;
+					list.add("見つかりません");
+					list.add("見つかりません");
 				}else{
-					return true;
+					list.add(result.getString("book_name"));
+					list.add(result.getString("category"));
 				}
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
-		return false;
+		return list;
 	}
 	
 	public void lendBook(int user, int book){
